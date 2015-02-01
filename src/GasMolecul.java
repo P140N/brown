@@ -4,17 +4,17 @@ import java.util.Random;
  * Created by anton on 21.01.15.
  */
 public class GasMolecul {
-    private double x;
-    private double y;
+    private int x;
+    private int y;
+    private static int r = 5;
     private static Random rand = new Random();
     GasMolecul(){
-        this.x = rand.nextDouble();
-        this.y = rand.nextDouble();
+        this.x = rand.nextInt(600);
+        this.y = rand.nextInt(430);
     }
-    public double getX(){
+    public int getX(){
         return this.x;
     }
-    public double getY(){
-        return this.y;
-    }
+    public int getY() { return this.y; }
+    public int getR() { return this.r; }
 }
