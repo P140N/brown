@@ -8,17 +8,22 @@ import java.util.ArrayList;
 public class PaintBrown extends JPanel {
     private ArrayList<GasMolecul> moleculs;
     private Partcle partcle;
+    Brown brown;
     public void paint(Graphics g){
         super.paint(g);
-        moleculs = new ArrayList<GasMolecul>();
+        g.setColor(Color.BLACK);
+        moleculs = brown.getMoleculs();
         GasMolecul mol;
-        for (int i = 0;i<10;i++){
-            mol = new GasMolecul();
-            g.drawOval(mol.getX(),mol.getY(),mol.getR(),mol.getR());
-            moleculs.add(mol);
+        for (int i = 0;i<brown.getNumber();i++){
+            mol = moleculs.get(i);
+            g.fillOval((int)(mol.getX()-mol.getR()),(int)(mol.getY()-mol.getR()),mol.getR()*2,mol.getR()*2);
         }
-        partcle = new Partcle();
-        g.drawOval(partcle.getX(),partcle.getY(),partcle.getR(),partcle.getR());
+        partcle = brown.getPartcle();
+        g.setColor(Color.green);
+        g.fillOval((int)(partcle.getX()-partcle.getR()),(int)(partcle.getY()-partcle.getR()),partcle.getR()*2,partcle.getR()*2);
 
+    }
+    public PaintBrown(Brown brown){
+        this.brown = brown;
     }
 }

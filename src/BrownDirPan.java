@@ -9,15 +9,21 @@ import java.util.ArrayList;
  */
 public class BrownDirPan extends JFrame {
     PaintBrown pb;
-
+    ButPan bp;
+    Brown brown;
     public BrownDirPan(){
         super("brown vizualization");
+        brown = new Brown();
         Container c =getContentPane();
         c.setLayout(new BorderLayout());
-        pb = new PaintBrown();
+        pb = new PaintBrown(brown);
         pb.setSize(600,430);//размеры поля с молекулами
-        c.add(pb,BorderLayout.CENTER);
-
+        pb.setBackground(Color.WHITE);
+        pb.setBorder(BorderFactory.createLineBorder(Color.black));
+        c.add(pb, BorderLayout.CENTER);
+        bp = new ButPan(pb,brown);
+        c.add(bp,BorderLayout.WEST);
+        setBackground(Color.GRAY);
         setSize(700,500);//размеры окна
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
