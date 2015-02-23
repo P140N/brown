@@ -3,7 +3,7 @@ import java.util.Random;
 /**
  * Created by anton on 21.01.15.
  */
-public class GasMolecul {
+public class GasMolecul implements Corpuscle {
 
     private Vector coordinates;
     private Vector speed;
@@ -40,7 +40,7 @@ public class GasMolecul {
     public void setSpeed(Vector speed) {
         this.speed = speed;
     }
-    public static int getMass() {
+    public int getMass() {
         return mass;
     }
 
