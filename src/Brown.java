@@ -43,6 +43,8 @@ public class Brown {
                     double dist1 = (mol.getX() - mol2.getX()) * (mol.getX() - mol2.getX()) + (mol.getY() - mol2.getY()) * (mol.getY() - mol2.getY());
                     if (dist1 <= ((mol.getR()+mol2.getR())*(mol.getR()+mol2.getR()))) {
                         recountCoordinates(i,j);
+                        moleculsNext.get(i).makeStep();
+                        moleculsNext.get(j).makeStep();
                     }
                 }
             }
@@ -57,21 +59,25 @@ public class Brown {
         int M2 = m2.getMass();
         Vector u1 = m1.getSpeed();
         Vector u2 = m2.getSpeed();
-        Vector Axis = dist(m1.getCoordinates(),m2.getCoordinates());
+
+        Vector Axis = dist(m2.getCoordinates(),m1.getCoordinates());
         Axis.normalizeThis();
         Vector u1x = mult(Axis,(mult(u1,Axis)));
         Vector u1y = dist(u1,u1x);
-        Axis = dist(m2.getCoordinates(),m1.getCoordinates());
+
+        Axis = dist(m1.getCoordinates(),m2.getCoordinates());
         Axis.normalizeThis();
         Vector u2x = mult(Axis,(mult(u2,Axis)));
         Vector u2y = dist(u2,u2x);
+
         Vector v1x = div(dist(summ(mult(u1x, M1), mult(u2x, M2)), mult(dist(u1x, u2x), M2)), (M1 + M2));
         Vector v2x = div(dist(summ(mult(u1x, M1), mult(u2x, M2)), mult(dist(u2x, u1x), M2)), (M1 + M2));
         Vector v1y = u1y;
         Vector v2y = u2y;
-      //  System.out.println("u2x"+u2x.getX()+" "+u2x.getY()+" v1x"+v1x.getX()+" "+v1x.getY());
-        Vector v1 = summ(u2x,v1y);
-        Vector v2 = summ(u1x,v2y);
+
+        Vector v1 = summ(v1x,v1y);
+        Vector v2 = summ(v2x,v2y);
+//        System.out.println("v1"+v1.getX()+" "+v1.getY()+" v2"+v2.getX()+" "+v2.getY());
         m1.setSpeed(v1);
         m2.setSpeed(v2);
     }
@@ -84,7 +90,7 @@ public class Brown {
         moleculs = moleculsNext;
         partcle = partcleNext;
         try{
-            Thread.currentThread().sleep(3);
+            Thread.currentThread().sleep(1);
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
